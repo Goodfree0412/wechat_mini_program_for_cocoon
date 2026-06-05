@@ -1,0 +1,69 @@
+<view class="container">
+  <view class="title">💐 定制您的专属花束</view>
+
+  <!-- 花束大小选择 -->
+  <view class="section">
+    <view class="section-title">选择花束大小</view>
+    <view class="size-selector">
+      <view 
+        class="size-btn {{selectedSize === 'S' ? 'active' : ''}}" 
+        bindtap="selectSize" 
+        data-size="S"
+      >
+        S
+      </view>
+      <view 
+        class="size-btn {{selectedSize === 'M' ? 'active' : ''}}" 
+        bindtap="selectSize" 
+        data-size="M"
+      >
+        M
+      </view>
+      <view 
+        class="size-btn {{selectedSize === 'L' ? 'active' : ''}}" 
+        bindtap="selectSize" 
+        data-size="L"
+      >
+        L
+      </view>
+    </view>
+  </view>
+
+  <!-- 颜色搭配选择 -->
+  <view class="section">
+    <view class="section-title">选择颜色搭配 (1-3种)</view>
+    <view class="color-selector">
+      <view 
+        wx:for="{{colors}}" 
+        wx:key="*this"
+        class="color-btn {{item.active ? 'active' : ''}}"
+        bindtap="toggleColor"
+        data-color="{{item.name}}"
+      >
+        {{item.name}}
+      </view>
+    </view>
+    <view class="tip-text">已选择：{{selectedColors.length}} 种颜色</view>
+  </view>
+
+  <!-- 花束预览 -->
+  <view class="section">
+    <view class="section-title">花束预览</view>
+    <view class="preview-box">
+      <image 
+        wx:if="{{previewImage}}"
+        class="preview-image" 
+        src="{{previewImage}}" 
+        mode="aspectFill"
+      />
+      <view wx:else class="placeholder-text">
+        根据您的需求匹配最佳花束...
+      </view>
+    </view>
+  </view>
+
+  <!-- 下一步按钮 -->
+  <button class="next-btn" bindtap="goToOrder">
+    下一步 →
+  </button>
+</view>
