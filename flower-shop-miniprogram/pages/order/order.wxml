@@ -1,0 +1,111 @@
+<view class="container">
+  <view class="page-title">📝 填写订单信息</view>
+
+  <!-- 收件人信息 -->
+  <view class="section">
+    <view class="section-title">收件信息</view>
+    
+    <view class="form-item">
+      <text class="label">收件人姓名</text>
+      <input 
+        class="input-box" 
+        placeholder="请输入收件人姓名" 
+        value="{{receiverName}}"
+        bindinput="onReceiverNameInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">收件人电话</text>
+      <input 
+        class="input-box" 
+        type="number"
+        placeholder="请输入收件人电话号码" 
+        value="{{receiverPhone}}"
+        bindinput="onReceiverPhoneInput"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">贺卡内容</text>
+      <textarea 
+        class="textarea-box" 
+        placeholder="请输入贺卡祝福语（选填）" 
+        value="{{cardMessage}}"
+        bindinput="onCardMessageInput"
+        maxlength="100"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">收件地址</text>
+      <input 
+        class="input-box" 
+        placeholder="请输入详细收件地址" 
+        value="{{receiverAddress}}"
+        bindinput="onReceiverAddressInput"
+      />
+    </view>
+
+    <!-- 地图选点 -->
+    <view class="form-item">
+      <text class="label">配送位置（点击地图选择）</text>
+      <map
+        id="orderMap"
+        class="map-container"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+        scale="16"
+        markers="{{markers}}"
+        enable-scroll="true"
+        show-location="true"
+        bindtap="chooseLocation"
+      >
+        <cover-view style="padding: 20rpx; background: rgba(255,255,255,0.9); border-radius: 10rpx; margin: 20rpx;">
+          <cover-view style="font-size: 24rpx; color: #666;">
+            📍 点击地图选择配送位置
+          </cover-view>
+        </cover-view>
+      </map>
+      <view class="map-tip" wx:if="{{selectedLocation}}">
+        已选择：{{selectedLocation}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单摘要 -->
+  <view class="section">
+    <view class="section-title">订单摘要</view>
+    <view class="summary-box">
+      <view class="summary-row">
+        <text>花束大小</text>
+        <text>{{orderSize}}</text>
+      </view>
+      <view class="summary-row">
+        <text>颜色搭配</text>
+        <text>{{orderColors}}</text>
+      </view>
+      <view class="summary-row">
+        <text>花束价格</text>
+        <text>¥{{flowerPrice}}</text>
+      </view>
+      <view class="summary-row">
+        <text>配送费用</text>
+        <text>¥{{deliveryFee}}</text>
+      </view>
+      <view class="summary-row" style="border-top: 1rpx solid #eee; padding-top: 15rpx; margin-top: 15rpx;">
+        <text style="font-size: 32rpx; font-weight: bold;">总计金额</text>
+        <text class="total-price">¥{{totalPrice}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 付款按钮 -->
+  <button class="pay-btn" bindtap="makePayment">
+    💳 立即支付 ¥{{totalPrice}}
+  </button>
+  
+  <view class="price-detail">
+    支付成功后，我们将尽快为您安排制作和配送
+  </view>
+</view>
